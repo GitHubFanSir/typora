@@ -318,7 +318,6 @@ git push origin master
 > password 你的密码
 
 <div style="color:#00F">蓝色</div>
-
 另外，如果远程仓库中已经有内容的话，仓库地址可以在这个地方看到
 
 ![1562602897504](尚硅谷-github.assets/1562602897504.png)
@@ -412,8 +411,11 @@ git pull origin master
 
 ![1562605802508](尚硅谷-github.assets/1562605802508.png)
 
-作为一个新员工，目前你IDEA工具里面已经有项目了，
-如何提交并进行工作协作？
+
+
+### 工作中用idea提交代码
+
+假设一个情景，作为一个新员工，目前你IDEA工具里面已经有项目了，如何提交并进行工作协作？
 
 (1)修改文件之前,一定要先git pull,保证修改的是最新的版本;
 
@@ -460,7 +462,7 @@ idea会提示进行冲突的解决。
 
 
 
-用IDEA工具生成git项目并上传到远程Github
+### 如何用IDEA工具生成git项目并上传到远程Github
 
 先用IDEA创建了一个普通的maven项目github02，此时它还不是一个git项目
 

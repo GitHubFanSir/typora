@@ -199,3 +199,109 @@ git  branch -D  <分支名>
 ![1562591011452](尚硅谷-github.assets/1562591011452.png)
 
 ![1562591287275](尚硅谷-github.assets/1562591287275.png)
+
+### 解决冲突
+
+通过git diff 可以找到发生冲突的文件及冲突的内容。
+
+![1562591916040](尚硅谷-github.assets/1562591916040.png)
+
+然后修改冲突文件的内容，再次`git add <file>` 和`git commit` 提交后，后缀MERGING消失，说明冲突解决完成。
+
+![1562591940059](尚硅谷-github.assets/1562591940059.png)
+
+# Git 常用命令小总结
+
+   mkdir：         		                          XX (创建一个空目录 XX指目录名)
+   pwd：          		                           显示当前目录的路径。
+   git init         		                            把当前的目录变成可以管理的git仓库，生成隐藏.git文件。
+   touch           	                               xx文件或者新建文件
+   git add XX      	                            把xx文件添加到暂存区去。
+   git commit –m “XX”                  	提交文件 –m 后面的是注释。
+   git status        	                           查看仓库状态
+   git diff  XX      	                            查看XX文件修改了那些内容
+   git log          		                           查看历史记录
+   git reset  --hard HEAD^	           版本回退
+   cat XX         		                            查看XX文件内容
+   git reflog       	                             版本穿梭，查看历史记录的版本号id
+   git checkout -- XX  	                   把XX文件在工作区的修改全部撤销。
+   git rm XX          	                          删除XX文件
+   git remote add origin https://github.com/zzyybs/testgit 	 关联一个远程库
+   git push –u(第一次要用-u 以后不需要) origin master 		     把当前master分支推送到远程库
+   git clone https://github.com/arjrzhouyang/testgit  		       从远程库中克隆
+   git checkout –b dev  				                                                    创建dev分支 并切换到dev分支上
+   git branch  			                      查看当前所有的分支
+   git checkout master 		          切换回master分支
+   git merge dev    		                  在当前的分支上合并dev分支
+   git branch –d dev 	               	删除dev分支
+   git branch name                 		创建分支
+   git remote                       			查看远程库的信息
+   git remote –v 	                     	查看远程库的详细信息
+   git push origin master      		Git会把master分支推送到远程库对应的远程分支上 
+
+
+
+# Github简介与实操
+
+### 是什么
+
+​	GitHub是一个Git项目托管网站,主要提供基于Git的版本托管服务
+
+![1562592412398](尚硅谷-github.assets/1562592412398.png)
+
+创建SSH Key：
+
+```
+ssh-keygen -t rsa -C   你自己用户邮箱
+```
+
+成功的话会在~/下生成.ssh文件夹
+
+![1562592539966](尚硅谷-github.assets/1562592539966.png)
+
+生成之后，把id-rsa.pub文件里的内容复制，粘贴到GitHub设置中的SSH and GPG keys中即可。然后运行以下命令测试是否可以连通
+
+```
+ssh -T git@github.com
+```
+
+连通之后，在github上新建一个仓库，建成之后会有如图片所示的提示
+
+![1562601469751](尚硅谷-github.assets/1562601469751.png)
+
+按照提示，在本地仓库中打开bash，输入给出的两行代码，就可以和GitHub进行关联了。
+
+```
+git remote add  <远端代号>   <远端地址> 
+```
+
+<远端代号>  是指远程链接的代号，一般直接用origin作代号，也可以自定义。
+
+<远端地址>   默认远程链接的url
+
+
+
+把本地库的内容推送到远程git push命令，实际上是把当前分支master推送到远程
+
+```
+git push -u origin master
+```
+
+由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+
+
+不过有一点不舒服的就是，每次push都需要输入账户名和密码。此时可以用以下方式操作，就可以避免了。
+
+在 “C:\用户\自己的账号” 的目录下新建名字为_netrc的文件并编辑该文件写如下内容：
+
+> machine github.com
+> login 你自己github登陆用户名
+> password 你的密码
+
+<div style="color:#00F">我字体是蓝色</div>
+
+
+
+
+

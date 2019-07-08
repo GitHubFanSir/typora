@@ -113,7 +113,7 @@ git  checkout -- 文件名
 1变更，没有add，没有commit
 
 ```
-git checkout-文件名
+git checkout --文件名
 ```
 
 2变更，有add，没有commit，执行以下命令把暂存区的修改撤销掉(*unstage*),重新放回工作区
@@ -138,4 +138,4 @@ git reset --hard HEAD^
 
 ![clip_image001](尚硅谷-github.assets/clip_image001.jpg)
 
-git checkout –b test
+git checkout –b test 123

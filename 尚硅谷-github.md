@@ -254,7 +254,7 @@ git  branch -D  <分支名>
 ##### 创建SSH Key：
 
 ```
-ssh-keygen -t rsa -C   你自己用户邮箱
+ssh-keygen -t rsa -C 自己的邮箱
 ```
 
 成功的话会在~/下生成.ssh文件夹
@@ -393,3 +393,97 @@ git pull origin master
 # github常用步骤总结
 
 ![1562604495138](尚硅谷-github.assets/1562604495138.png)
+
+
+
+# 在IDEA中配置Git
+
+![1562605581006](尚硅谷-github.assets/1562605581006.png)
+
+![1562605596183](尚硅谷-github.assets/1562605596183.png)
+
+### 将github上已有的项目导入到IDEA开发工具中
+
+![1562605752534](尚硅谷-github.assets/1562605752534.png)
+
+![1562605764840](尚硅谷-github.assets/1562605764840.png)
+
+![1562605796100](尚硅谷-github.assets/1562605796100.png)
+
+![1562605802508](尚硅谷-github.assets/1562605802508.png)
+
+作为一个新员工，目前你IDEA工具里面已经有项目了，
+如何提交并进行工作协作？
+
+(1)修改文件之前,一定要先git pull,保证修改的是最新的版本;
+
+(2)git push之前一定要先git pull,因为可能别人修改相同的文件并已commit,应该merge过来后再一并push
+
+
+
+在IDEA工具中先pull，保证修改的是最新的版本
+
+![1562605851034](尚硅谷-github.assets/1562605851034.png)
+
+
+
+在IDEA工具中修改代码，add
+
+![1562605859391](尚硅谷-github.assets/1562605859391.png)
+
+在IDEA工具中修改代码，commit
+
+![1562605930668](尚硅谷-github.assets/1562605930668.png)
+
+在IDEA工具中修改代码，commit并编写message
+
+![1562605960479](尚硅谷-github.assets/1562605960479.png)
+
+在IDEA工具中修改代码，选择pull进行更新代码操作
+
+![1562606008494](尚硅谷-github.assets/1562606008494.png)
+
+在IDEA工具中修改代码，push到远程Github库
+
+![1562606107286](尚硅谷-github.assets/1562606107286.png)
+
+![1562606117843](尚硅谷-github.assets/1562606117843.png)
+
+IDEA假如忘记pull（故意冲突/故意冲突/故意冲突），
+某一行内容和远程仓库冲突了，没有pull，直接git add ->commit ->push
+
+![1562606299258](尚硅谷-github.assets/1562606299258.png)
+
+![1562606318830](尚硅谷-github.assets/1562606318830.png)
+
+idea会提示进行冲突的解决。
+
+
+
+用IDEA工具生成git项目并上传到远程Github
+
+先用IDEA创建了一个普通的maven项目github02，此时它还不是一个git项目
+
+创建本地仓库，VCS-->Import into Version Control-->Create Git Repository...
+
+![1562606416104](尚硅谷-github.assets/1562606416104.png)
+
+上传项目到本地仓库，项目右键选择Git-->add，
+此时项目文件由红色变成绿色，此时文件只是处于暂存区，并没有真正进入到版本库中
+
+![1562606519596](尚硅谷-github.assets/1562606519596.png)
+
+![1562606530282](尚硅谷-github.assets/1562606530282.png)
+
+上传项目到本地仓库，项目右键选择Git-->commit在弹窗中输入Commit Message，点击commit，此时项目文件从暂存区真正进入版本库中，项目文件变成黑色
+
+![1562606541839](尚硅谷-github.assets/1562606541839.png)
+
+上传项目到GitHub中，
+VCS-->Import into Version Control-->Share Project on GitHub
+
+![1562606568725](尚硅谷-github.assets/1562606568725.png)
+
+![1562606574976](尚硅谷-github.assets/1562606574976.png)
+
+![1562606582221](尚硅谷-github.assets/1562606582221.png)

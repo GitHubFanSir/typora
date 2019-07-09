@@ -433,17 +433,25 @@ git pull origin master
 
 ![1562605859391](尚硅谷-github.assets/1562605859391.png)
 
+
+
 在IDEA工具中修改代码，commit
 
 ![1562605930668](尚硅谷-github.assets/1562605930668.png)
+
+
 
 在IDEA工具中修改代码，commit并编写message
 
 ![1562605960479](尚硅谷-github.assets/1562605960479.png)
 
+
+
 在IDEA工具中修改代码，选择pull进行更新代码操作
 
 ![1562606008494](尚硅谷-github.assets/1562606008494.png)
+
+
 
 在IDEA工具中修改代码，push到远程Github库
 
@@ -451,7 +459,9 @@ git pull origin master
 
 ![1562606117843](尚硅谷-github.assets/1562606117843.png)
 
-IDEA假如忘记pull（故意冲突/故意冲突/故意冲突），
+
+
+IDEA假如忘记pull（故意冲突），
 某一行内容和远程仓库冲突了，没有pull，直接git add ->commit ->push
 
 ![1562606299258](尚硅谷-github.assets/1562606299258.png)
@@ -470,6 +480,8 @@ idea会提示进行冲突的解决。
 
 ![1562606416104](尚硅谷-github.assets/1562606416104.png)
 
+
+
 上传项目到本地仓库，项目右键选择Git-->add，
 此时项目文件由红色变成绿色，此时文件只是处于暂存区，并没有真正进入到版本库中
 
@@ -477,9 +489,13 @@ idea会提示进行冲突的解决。
 
 ![1562606530282](尚硅谷-github.assets/1562606530282.png)
 
+
+
 上传项目到本地仓库，项目右键选择Git-->commit在弹窗中输入Commit Message，点击commit，此时项目文件从暂存区真正进入版本库中，项目文件变成黑色
 
 ![1562606541839](尚硅谷-github.assets/1562606541839.png)
+
+
 
 上传项目到GitHub中，
 VCS-->Import into Version Control-->Share Project on GitHub

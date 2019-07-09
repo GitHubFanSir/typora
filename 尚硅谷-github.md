@@ -41,7 +41,11 @@
     * [解决冲突](#解决冲突-1)
 * [github常用步骤总结](#github常用步骤总结)
 * [在IDEA中配置Git](#在idea中配置git)
-    * [将github上已有的项目导入到IDEA开发工具中](#将github上已有的项目导入到idea开发工具中)
+    * [git status
+      git add .
+      git commit -m "upload"
+      git push origin master
+      git status将github上已有的项目导入到IDEA开发工具中](#将github上已有的项目导入到idea开发工具中)
     * [工作中用idea提交代码](#工作中用idea提交代码)
     * [如何用IDEA工具生成git项目并上传到远程Github](#如何用idea工具生成git项目并上传到远程github)
 

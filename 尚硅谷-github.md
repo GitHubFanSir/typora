@@ -333,7 +333,18 @@ git clone 仓库地址
 
 ![1562603277455](尚硅谷-github.assets/1562603277455.png)
 
-一般工作流程如下：
+
+
+### 下载
+
+```
+git fetch origin master（先看远程仓库是否有先于自己的修改）
+git pull origin master
+```
+
+
+
+### 工作流程和交互模型
 
 1 克隆 Git 资源作为工作目录。
 2 在克隆的资源上添加或修改文件。
@@ -342,18 +353,7 @@ git clone 仓库地址
 5 提交修改。
 6 在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。
 
-
-
-Git交互模型
-
-![1562603395042](尚硅谷-github.assets/1562603395042.png)
-
-### 下载
-
-```
-git fetch origin master（先看远程仓库是否有先于自己的修改）
-git pull origin master
-```
+![1562603395042](%E5%B0%9A%E7%A1%85%E8%B0%B7-github.assets/1562603395042.png)
 
 
 
@@ -491,7 +491,7 @@ idea会提示进行冲突的解决。
 
 
 
-上传项目到本地仓库，项目右键选择Git-->commit在弹窗中输入Commit Message，点击commit，此时项目文件从暂存区真正进入版本库中，项目文件变成黑色
+上传项目到本地仓库，项目右键选择Git-->commit。在弹窗中输入Commit Message，点击commit，此时项目文件从暂存区真正进入版本库中，项目文件变成黑色
 
 ![1562606541839](尚硅谷-github.assets/1562606541839.png)
 

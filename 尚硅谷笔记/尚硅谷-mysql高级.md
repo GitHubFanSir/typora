@@ -265,7 +265,17 @@ SELECT * FROM class LEFT JOIN book ON class.card=book.card ===>result01
 ### 是什么
 
 MySQL官方对索引的定义为：索引（Index）是帮助MySQL高效获取数据的数据结构。
+
 可以得到索引的本质：索引是数据结构。
 
 我们可以简单理解为“排好序的快速查找数据结构”。
 
+1680一个月
+
+30卫生费
+
+100网费
+
+1.3一度电
+
+6元一段谁

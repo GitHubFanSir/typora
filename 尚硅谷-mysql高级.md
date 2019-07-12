@@ -152,9 +152,7 @@ AliSql+AliRedis  TDDL HSF（dubbo的改良版）
 >
 > HAVING <having_condition>
 >
-> SELECT
->
-> DISTINCT <select_list>
+> SELECT DISTINCT <select_list>
 >
 > ORDER BY <order_by_condition>
 >

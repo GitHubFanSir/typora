@@ -1,4 +1,4 @@
-sprngboot是要结合着微服务用的。之前我们的项目是单体应用，所有的功能最后都在一个war包中，会造成其中其中功能一旦出了问题，那么服务器就可以卡死，进而该服务器上的所有功能都会崩溃。这就是单体应用的很明显的劣势。所以我们可以把单体应用中的每个功能都作为一个独立的应用来开发，结合着springboot自带tomcat的便利，把这些应用分布式地部署在不同的服务器上。
+sprngboot是要结合着微服务用的。之前我们的项目是单体应用，所有的功能最后都在一个war包中，会造成其中一个功能一旦出了问题，那么服务器就可以卡死，进而该服务器上的所有功能都会崩溃。这就是单体应用很明显的劣势。所以我们可以把单体应用中的每个功能都作为一个独立的应用来开发，结合着springboot自带tomcat的便利，把这些应用分布式地部署在不同的服务器上。
 
 # Spring Boot 介绍
 
@@ -38,13 +38,13 @@ l  与云计算的天然集成
 
 https://docs.spring.io/spring-boot/docs/2.0.7.RELEASE/reference/htmlsingle/#getting-started-system-requirements
 
-![clip_image002](SGG-SpringBoot.assets/clip_image002.jpg)
+![clip_image001](SGG-SpringBoot.assets/clip_image001-1562930047518.png)
 
 # 第二章 项目架构-单体应用
 
 ## 2.1 单体应用
 
-![clip_image004](SGG-SpringBoot.assets/clip_image004.jpg)
+![clip_image001](SGG-SpringBoot.assets/clip_image001-1562930107472.png)
 
 开发简单：自己一个人就可以开发
 
@@ -90,9 +90,7 @@ l  **技术债务**：“不坏不修（Not broken，don’t fix）”，这在�
 
 ## 3.1 微服务
 
-
-
-![clip_image006](SGG-SpringBoot.assets/clip_image006.jpg)
+![clip_image001](SGG-SpringBoot.assets/clip_image001-1562930161924.png)
 
 ## 3.2 微服务的样子
 
@@ -118,7 +116,9 @@ http://blog.cuicc.com/blog/2015/07/22/microservices/
 
 2，功能直间怎么互相调用（RPC）
 
-![clip_image009.jpg](SGG-SpringBoot.assets/clip_image009.jpg)
+![clip_image001](SGG-SpringBoot.assets/clip_image001-1562930251170.png)
+
+
 
 ## 3.3 Spring官网
 

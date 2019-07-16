@@ -256,7 +256,7 @@ A：场景启动器负责导包，SpringBoot负责管理jar的版本。在启动
 ​          @Import(AutoConfigurationImportSelector.class)
 ​          public @interface EnableAutoConfiguration {
 ​          //自动配置获职这些自动配置类；META-INF/spring.factories
-​          所有能自动配置的都在 spring-boot-autoconfigure-2.1.3.RELEASE.jar
+​          所有能自动配置的都在 spring-boot-<span style="color:#00F">autoconfigure</span>-2.1.3.RELEASE.jar
 
 xxxxAutoConfiguration类是来自动配置的；
 
@@ -641,4 +641,913 @@ haha.content.code=1
 只支持properties，和springxml
 
 SpringBoot:快速地把任何javaBean的任何属性都变为可配置的属性（就是说类中的属性值可以直接在配置文件中修改）；
+
+
+
+# 三大框架整合（springboot方式）
+
+1，点击spring initializer，选择web中的Spring Web Starter，还有SQL中的MysqlDriver和Mybatis Framework，然后finish。
+
+2，主类和相关的jar包都已经准备好了。
+
+spring官方的starter:spring-boot-starter-xxx 
+第三方写的：mybatis-spring-boot-starter:xxx-spring-boot-starter
+
+### SpringBootSsmApplication
+
+```java
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ *
+
+- 1、导入mybatis的starter；mybatis都自动配置好了，如果我们想要改配置；
+
+- MybatisAutoConfiguration===>MybatisProperties(绑定了mybatis前缀了)
+
+- 2、配置数据库
+
+- 3、一个注解，指定Mapper 接口在哪里和 mapper-xml都在哪里
+
+- @MapperScan("com.atguigu.ssm.mapper")
+
+- 改配置文件：mybatis.mapper-locations=classpath:mybatis/*.xml
+  *
+   */
+  @MapperScan("com.atguigu.ssm.mapper")
+  @SpringBootApplication
+  public class SpringBootSsmApplication {
+
+  public static void main(String[] args) {
+      SpringApplication.run(SpringBootSsmApplication.class, args);
+  }
+
+}
+```
+
+### application.properties
+
+```properties
+spring.datasource.username=root
+spring.datasource.password=123456
+spring.datasource.url=jdbc:mysql://192.168.128.130:3306/atcrowdfunding?serverTimezone=UTC
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+```
+
+### TAdminMapper.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.ssm.mapper.TAdminMapper">
+  <select id="selectByExample" resultType="com.atguigu.ssm.bean.TAdmin">
+    select * from t_admin
+  </select>
+</mapper>
+```
+
+### TAdmin
+
+
+```java
+package com.atguigu.ssm.bean;
+
+public class TAdmin {
+    private Integer id;
+
+    private String loginacct;
+    
+    private String userpswd;
+    
+    private String username;
+    
+    private String email;
+    
+    private String createtime;
+    
+    public Integer getId() {
+        return id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    public String getLoginacct() {
+        return loginacct;
+    }
+    
+    public void setLoginacct(String loginacct) {
+        this.loginacct = loginacct == null ? null : loginacct.trim();
+    }
+    
+    public String getUserpswd() {
+        return userpswd;
+    }
+    
+    public void setUserpswd(String userpswd) {
+        this.userpswd = userpswd == null ? null : userpswd.trim();
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+    
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+    
+    public String getCreatetime() {
+        return createtime;
+    }
+    
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime == null ? null : createtime.trim();
+    }
+    
+    @Override
+    public String toString() {
+    	return "TAdmin [id=" + id + ", loginacct=" + loginacct + ", userpswd=" + userpswd + ", username=" + username
+    			+ ", email=" + email + ", createtime=" + createtime + "]";
+    }
+
+}
+```
+
+### TAdminExample
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class TAdminExample {
+    protected String orderByClause;
+
+    protected boolean distinct;
+
+    protected List<Criteria> oredCriteria;
+
+    public TAdminExample() {
+        oredCriteria = new ArrayList<Criteria>();
+    }
+
+    public void setOrderByClause(String orderByClause) {
+        this.orderByClause = orderByClause;
+    }
+
+    public String getOrderByClause() {
+        return orderByClause;
+    }
+
+    public void setDistinct(boolean distinct) {
+        this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
+    }
+
+    public List<Criteria> getOredCriteria() {
+        return oredCriteria;
+    }
+
+    public void or(Criteria criteria) {
+        oredCriteria.add(criteria);
+    }
+
+    public Criteria or() {
+        Criteria criteria = createCriteriaInternal();
+        oredCriteria.add(criteria);
+        return criteria;
+    }
+
+    public Criteria createCriteria() {
+        Criteria criteria = createCriteriaInternal();
+        if (oredCriteria.size() == 0) {
+            oredCriteria.add(criteria);
+        }
+        return criteria;
+    }
+
+    protected Criteria createCriteriaInternal() {
+        Criteria criteria = new Criteria();
+        return criteria;
+    }
+
+    public void clear() {
+        oredCriteria.clear();
+        orderByClause = null;
+        distinct = false;
+    }
+
+    protected abstract static class GeneratedCriteria {
+        protected List<Criterion> criteria;
+
+        protected GeneratedCriteria() {
+            super();
+            criteria = new ArrayList<Criterion>();
+        }
+
+        public boolean isValid() {
+            return criteria.size() > 0;
+        }
+
+        public List<Criterion> getAllCriteria() {
+            return criteria;
+        }
+
+        public List<Criterion> getCriteria() {
+            return criteria;
+        }
+
+        protected void addCriterion(String condition) {
+            if (condition == null) {
+                throw new RuntimeException("Value for condition cannot be null");
+            }
+            criteria.add(new Criterion(condition));
+        }
+
+        protected void addCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value));
+        }
+
+        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdEqualTo(Integer value) {
+            addCriterion("id =", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotEqualTo(Integer value) {
+            addCriterion("id <>", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThan(Integer value) {
+            addCriterion("id >", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("id >=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThan(Integer value) {
+            addCriterion("id <", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
+            addCriterion("id <=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIn(List<Integer> values) {
+            addCriterion("id in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotIn(List<Integer> values) {
+            addCriterion("id not in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdBetween(Integer value1, Integer value2) {
+            addCriterion("id between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctIsNull() {
+            addCriterion("loginacct is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctIsNotNull() {
+            addCriterion("loginacct is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctEqualTo(String value) {
+            addCriterion("loginacct =", value, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctNotEqualTo(String value) {
+            addCriterion("loginacct <>", value, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctGreaterThan(String value) {
+            addCriterion("loginacct >", value, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctGreaterThanOrEqualTo(String value) {
+            addCriterion("loginacct >=", value, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctLessThan(String value) {
+            addCriterion("loginacct <", value, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctLessThanOrEqualTo(String value) {
+            addCriterion("loginacct <=", value, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctLike(String value) {
+            addCriterion("loginacct like", value, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctNotLike(String value) {
+            addCriterion("loginacct not like", value, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctIn(List<String> values) {
+            addCriterion("loginacct in", values, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctNotIn(List<String> values) {
+            addCriterion("loginacct not in", values, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctBetween(String value1, String value2) {
+            addCriterion("loginacct between", value1, value2, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginacctNotBetween(String value1, String value2) {
+            addCriterion("loginacct not between", value1, value2, "loginacct");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdIsNull() {
+            addCriterion("userpswd is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdIsNotNull() {
+            addCriterion("userpswd is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdEqualTo(String value) {
+            addCriterion("userpswd =", value, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdNotEqualTo(String value) {
+            addCriterion("userpswd <>", value, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdGreaterThan(String value) {
+            addCriterion("userpswd >", value, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdGreaterThanOrEqualTo(String value) {
+            addCriterion("userpswd >=", value, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdLessThan(String value) {
+            addCriterion("userpswd <", value, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdLessThanOrEqualTo(String value) {
+            addCriterion("userpswd <=", value, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdLike(String value) {
+            addCriterion("userpswd like", value, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdNotLike(String value) {
+            addCriterion("userpswd not like", value, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdIn(List<String> values) {
+            addCriterion("userpswd in", values, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdNotIn(List<String> values) {
+            addCriterion("userpswd not in", values, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdBetween(String value1, String value2) {
+            addCriterion("userpswd between", value1, value2, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpswdNotBetween(String value1, String value2) {
+            addCriterion("userpswd not between", value1, value2, "userpswd");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameIsNull() {
+            addCriterion("username is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameIsNotNull() {
+            addCriterion("username is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameEqualTo(String value) {
+            addCriterion("username =", value, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameNotEqualTo(String value) {
+            addCriterion("username <>", value, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameGreaterThan(String value) {
+            addCriterion("username >", value, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameGreaterThanOrEqualTo(String value) {
+            addCriterion("username >=", value, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameLessThan(String value) {
+            addCriterion("username <", value, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameLessThanOrEqualTo(String value) {
+            addCriterion("username <=", value, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameLike(String value) {
+            addCriterion("username like", value, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameNotLike(String value) {
+            addCriterion("username not like", value, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameIn(List<String> values) {
+            addCriterion("username in", values, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameNotIn(List<String> values) {
+            addCriterion("username not in", values, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameBetween(String value1, String value2) {
+            addCriterion("username between", value1, value2, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsernameNotBetween(String value1, String value2) {
+            addCriterion("username not between", value1, value2, "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailIsNull() {
+            addCriterion("email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailIsNotNull() {
+            addCriterion("email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailEqualTo(String value) {
+            addCriterion("email =", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotEqualTo(String value) {
+            addCriterion("email <>", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailGreaterThan(String value) {
+            addCriterion("email >", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("email >=", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLessThan(String value) {
+            addCriterion("email <", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLessThanOrEqualTo(String value) {
+            addCriterion("email <=", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLike(String value) {
+            addCriterion("email like", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotLike(String value) {
+            addCriterion("email not like", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailIn(List<String> values) {
+            addCriterion("email in", values, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotIn(List<String> values) {
+            addCriterion("email not in", values, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailBetween(String value1, String value2) {
+            addCriterion("email between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotBetween(String value1, String value2) {
+            addCriterion("email not between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNull() {
+            addCriterion("createtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNotNull() {
+            addCriterion("createtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeEqualTo(String value) {
+            addCriterion("createtime =", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotEqualTo(String value) {
+            addCriterion("createtime <>", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThan(String value) {
+            addCriterion("createtime >", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThanOrEqualTo(String value) {
+            addCriterion("createtime >=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThan(String value) {
+            addCriterion("createtime <", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThanOrEqualTo(String value) {
+            addCriterion("createtime <=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLike(String value) {
+            addCriterion("createtime like", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotLike(String value) {
+            addCriterion("createtime not like", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIn(List<String> values) {
+            addCriterion("createtime in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotIn(List<String> values) {
+            addCriterion("createtime not in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeBetween(String value1, String value2) {
+            addCriterion("createtime between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotBetween(String value1, String value2) {
+            addCriterion("createtime not between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+    }
+
+    public static class Criteria extends GeneratedCriteria {
+
+        protected Criteria() {
+            super();
+        }
+    }
+
+    public static class Criterion {
+        private String condition;
+
+        private Object value;
+
+        private Object secondValue;
+
+        private boolean noValue;
+
+        private boolean singleValue;
+
+        private boolean betweenValue;
+
+        private boolean listValue;
+
+        private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
+        protected Criterion(String condition) {
+            super();
+            this.condition = condition;
+            this.typeHandler = null;
+            this.noValue = true;
+        }
+
+        protected Criterion(String condition, Object value, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.typeHandler = typeHandler;
+            if (value instanceof List<?>) {
+                this.listValue = true;
+            } else {
+                this.singleValue = true;
+            }
+        }
+
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.secondValue = secondValue;
+            this.typeHandler = typeHandler;
+            this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
+        }
+    }
+}
+```
+
+### AdminController
+
+```java
+import com.atguigu.ssm.bean.TAdmin;
+import com.atguigu.ssm.mapper.TAdminMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class AdminController {
+
+    @Autowired
+    TAdminMapper adminMapper;
+
+    @GetMapping("/admins")
+    public List<TAdmin> getAllAdmin(){
+        return adminMapper.selectByExample(null);
+    }
+
+}
+```
+
+![1562937352641](SGG-SpringBoot.assets/1562937352641.png)
+
+# ssm整合注解版
+
+通过spring initializer创建项目之后，在application.properties中配置相应的连接池信息，然后还是配置SpringBootSsmApplication主类。然后写好（复制好）TAdmin类
+
+### TAdminMapper.java
+
+```
+import com.atguigu.ssm.bean.TAdmin;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+
+public interface TAdminMapper {
+
+    @Select("select * from t_admin")
+    public List<TAdmin> getAllAdmin();
+}
+```
+
+### AdminController
+
+```
+package com.atguigu.ssm.controller;
+
+import com.atguigu.ssm.bean.TAdmin;
+import com.atguigu.ssm.mapper.TAdminMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class AdminController {
+
+    @Autowired
+    TAdminMapper adminMapper;
+
+    @GetMapping("/all")
+    public List<TAdmin> getAll(){
+
+        return adminMapper.getAllAdmin();
+    }
+}
+```
+
+然后就可以启动主类了。
+
+# springboot的配置原理
+
+1）、@Bean：将方法的返回对象作为组件添加到容器中
+
+2）、@Configuration：这是一个配置类,他也是容器中的组件
+
+3）、@ConfigurationProperties：将javaBean的属性和配置文件中指定前缀的属性一一绑定；
+
+1、为什么中文没乱码？
+
+以前在web.xml中配置一个 CharacterEncodingFilter。现在自动好了。其实，CharacterEncodingFilter还需要配置，只是SpringBoot帮我们配置了
+
+SpringMVC的自动配置：
+
+​	1）、WebMvcAutoConfiguration（自动配SpringMVC）
+
+​		自动加了OrderedHiddenHttpMethodFilter：rest风格的过滤器
+
+​		自动加了OrderedFormContentFilter：解决ajax请求携带不到请求体数据问题；
+
+​		自动加了InternalResourceViewResolver：视图解析器；指定前后缀
+
+​		自动加了LocaleResolver：国际化解析器
+
+​		自动加了欢迎页的处理器WelcomePageHandlerMapping
+
+​		等等一堆东西都已经自动配置了
+
+所有SpringMVC的自动配置都在:
+
+```
+@ConfigurationProperties(prefix = "spring.mvc")
+public class WebMvcProperties
+```
+
+2）、DispatcherServletAutoConfiguration：
+
+​	自动配置了DispatcherServlet： ServletRegistrationBean
+
+​	自动配置了MultipartResolver；文件上传功能
+3）、HttpEncodingAutoConfiguration：HttpEncoding的配置
+​	自动加了CharacterEncodingFilter，解决了乱码文件。
+
+CharacterEncodingFilter的属性值；
+
+- setEncoding；
+- setForceRequestEncoding；
+- setForceResponseEncoding；
+
+以上的属性值是从HttpProperties里面获取到的。
+
+```
+@ConfigurationProperties(prefix = "spring.http")
+	public class HttpProperties
+```
+
+HttpEncodingAutoConfiguration自动配置乱码的解决方案：
+	它给容器中放好了CharacterEncodingFilter，filter使用 HttpProperties 中规定编码规则，而HttpProperties是和配置文件的spring.http前缀所有属性绑定的；
+
+综上所述，SpringBoot中会有大量的<span style="color:#00F"> xxxxAutoConfiguration</span>，这些自动配置类给容器中加入了很多的组件，这些组件就生效了，这些组件的一些属性设置都是和 <span style="color:#00F">xxxProperties </span>绑定的；
+
+
+
+static:放静态资源
+
+templates：里面放模板（页面）；不支持jsp；模板引擎
+
+springboot会动态判断哪些自动配置要加，哪些不要？
+ 1）、智能之源；@ConditionalXXX注解；
+     @Conditional：系统环境条件判断注解
+     @ConditionalOnClass({ RabbitTemplate.class, Channel.class })
+
+ 2）、SpringBoot在加组件之前都会基本判断 
+	@ConditionalOnMissingBean；容器中没有这个组件，才配置一个；
+     组件只要我们给容器中加了自定义的，就用我们的，否则SpringBoot用它的；
+     SpringBoot允许所有的组件只要我们不满意就给容器中放一个我们自己写的，SpringBoot就会用我们的；
+
+springboot启动之后不会把所有自动 配置类中的组件都加到容器中，在XXXAutoConfiguration类上，会有一个@ConditionalOn
 

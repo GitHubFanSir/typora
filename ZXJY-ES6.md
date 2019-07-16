@@ -243,7 +243,7 @@ showInfo("Amy", null)  // Amy, null
 
 箭头函数多用于**匿名函数**的定义
 
-```
+```js
 let arr = ["10", "5", "40", "25", "1000"]
 arr1 = arr.sort()
 console.log(arr1)

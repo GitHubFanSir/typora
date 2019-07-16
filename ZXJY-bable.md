@@ -64,11 +64,78 @@ presets字段设定转码规则，将es2015规则加入 .babelrc：
 }
 ```
 
-3、安装转码器
+### 4、安装转码器
 
 在项目中安装，执行以下命令
 
 ```
 npm install --save-dev babel-preset-es2015
 ```
+
+### 5、转码
+
+```
+# 转码结果写入一个文件
+mkdir dist1
+# --out-file 或 -o 参数指定输出文件
+babel src/example.js --out-file dist1/compiled.js
+# 或者
+babel src/example.js -o dist1/compiled.js
+
+# 整个目录转码
+mkdir dist2
+# --out-dir 或 -d 参数指定输出目录
+babel src --out-dir dist2
+# 或者
+babel src -d dist2
+```
+
+babel .\src\example.js -o .\dist1\compiled.js
+
+babel src -d dist2
+
+![1563273557224](ZXJY-bable.assets/1563273557224.png)
+
+### 5.1、转码的结果
+
+```
+"use strict";
+//转码前
+//定义数据
+var input=[1,2,3]；
+将数组的每个元素+1
+input = input.map(function (item){
+  return item +1;
+})；
+console.1og(input);
+```
+
+
+
+### 6、自定义脚本
+
+改写package.json：
+
+```json
+{
+    // ...
+    "scripts": {
+        // ...
+        "build":  "babel src\\example.js -o dist\\compiled.js"
+    },
+}
+```
+
+### 转码的时候，执行下面的命令
+
+```
+mkdir dist
+npm run build
+```
+
+
+
+
+
+
 
